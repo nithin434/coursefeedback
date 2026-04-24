@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <meta name="title" content="VIT-AP Course Feedback Autofill Tool | Nithin Jambul & Bhaskar Boddeti">
+    <meta name="description" content="Automate VIT-AP course feedback form filling in seconds. A lightweight extension for VTOP and vitap.ac.in by Nithin Jambul and Bhaskar Boddeti.">
+    <meta name="keywords" content="vitap, vitap.ac.in, vtop vitap, course feedback automation, vit feedback bot, vtop.vitap.ac.in, vit ap automation, vit forms autofill, nithin jambul, bhaskar boddeti">
+    <meta name="author" content="Nithin Jambul, Bhaskar Boddeti">
+    <meta name="creator" content="Nithin Jambul, Bhaskar Boddeti">
+    <meta name="publisher" content="Nithin Jambul, Bhaskar Boddeti">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#111111">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="VIT-AP Course Feedback Autofill Tool">
+    <meta property="og:description" content="Auto-fill VIT-AP course feedback quickly and consistently with a simple browser extension.">
+    <meta property="og:site_name" content="Course Feedback Autofill Tool">
+    <meta property="og:locale" content="en_IN">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VIT-AP Course Feedback Autofill Tool">
+    <meta name="twitter:description" content="Built by Nithin Jambul and Bhaskar Boddeti for faster course feedback automation.">
+    <meta property="article:author" content="https://www.linkedin.com/in/bhaskar-boddeti-827a61357">
+    <meta property="article:author" content="https://www.linkedin.com/in/nithin-jambula">
+
+    <link rel="me" href="https://www.linkedin.com/in/bhaskar-boddeti-827a61357">
+    <link rel="me" href="https://www.linkedin.com/in/nithin-jambula">
+
+    <title>shh 🤫</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --panel: #131313;
+            --text: #f2f2f2;
+            --muted: #a7a7a7;
+            --accent: #e6ff57;
+            --accent-2: #6ce8d9;
+            --border: rgba(255, 255, 255, 0.14);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 15% 15%, rgba(108, 232, 217, 0.2), transparent 35%),
+                radial-gradient(circle at 85% 20%, rgba(230, 255, 87, 0.16), transparent 28%),
+                linear-gradient(180deg, #070707 0%, #101010 100%);
+            color: var(--text);
+            font-family: "Space Grotesk", "Segoe UI", sans-serif;
+        }
+
+        .container {
+            width: min(1040px, 92vw);
+            margin: 0 auto;
+            padding: clamp(28px, 4vw, 64px) 0 clamp(44px, 6vw, 72px);
+        }
+
+        .hero {
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+            box-shadow: var(--shadow);
+            padding: clamp(24px, 5vw, 56px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            right: -140px;
+            top: -120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(108, 232, 217, 0.25), transparent 65%);
+            pointer-events: none;
+        }
+
+        .shh {
+            font-size: clamp(48px, 8vw, 76px);
+            line-height: 1;
+            margin-bottom: 10px;
+            opacity: 0.85;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: "Syne", "Space Grotesk", sans-serif;
+            font-size: clamp(32px, 8vw, 68px);
+            letter-spacing: -0.03em;
+            line-height: 1.02;
+            max-width: 12ch;
+        }
+
+        .subtitle {
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: clamp(15px, 2vw, 18px);
+            line-height: 1.6;
+            max-width: 62ch;
+        }
+
+        .download-btn {
+            margin-top: 26px;
+            padding: 13px 26px;
+            border-radius: 999px;
+            border: 1px solid #2b2b2b;
+            background: linear-gradient(90deg, var(--accent), #f4ffab);
+            color: #0d0d0d;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: "Space Grotesk", "Segoe UI", sans-serif;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .download-btn:focus-visible {
+            outline: 2px solid var(--accent-2);
+            outline-offset: 2px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(230, 255, 87, 0.28);
+        }
+
+        .instructions {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .step {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--panel);
+            padding: 18px 18px 16px;
+            animation: rise 0.6s ease both;
+        }
+
+        .step:nth-child(2) {
+            animation-delay: 0.12s;
+        }
+
+        .step h2 {
+            margin: 0 0 8px;
+            font-size: 20px;
+            font-family: "Syne", "Space Grotesk", sans-serif;
+        }
+
+        .step p {
+            margin: 0;
+            color: #d4d4d4;
+            line-height: 1.8;
+        }
+
+        .step-media {
+            margin: 0 0 12px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: #0d0d0d;
+        }
+
+        .step-media img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 240px;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .step-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: #ececec;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .step-btn:hover {
+            transform: translateY(-1px);
+            border-color: var(--accent-2);
+            color: #ffffff;
+        }
+
+        .footer {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 24px;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--muted);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 16px;
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 800px) {
+            .instructions {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "VIT-AP Course Feedback Autofill Tool",
+            "applicationCategory": "BrowserApplication",
+            "operatingSystem": "Chrome",
+            "description": "Browser extension for automating VIT-AP course feedback form filling.",
+            "author": [
+                {
+                    "@type": "Person",
+                    "name": "Nithin Jambul",
+                    "url": "https://www.linkedin.com/in/nithin-jambula",
+                    "sameAs": [
+                        "http://nithinjambula.dev/",
+                        "https://www.linkedin.com/in/nithin-jambula"
+                    ]
+                },
+                {
+                    "@type": "Person",
+                    "name": "Bhaskar Boddeti",
+                    "url": "https://www.linkedin.com/in/bhaskar-boddeti-827a61357",
+                    "sameAs": [
+                        "http://bhasprojects.in/",
+                        "https://www.linkedin.com/in/bhaskar-boddeti-827a61357"
+                    ]
+                }
+            ]
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="hero">
+        <div class="shh" aria-hidden="true">🤫</div>
+        <h1>keep it quiet.</h1>
+        <p class="subtitle">
+            A lightweight helper for VIT feedback pages. Download, load unpacked, and fill course forms in a few clicks.
+        </p>
+
+        <button class="download-btn" onclick="downloadZip()" type="button">
+            Download Tool
+        </button>
+
+        <div class="instructions">
+            <article class="step">
+                <h2>Step 1 (1.jpeg)</h2>
+                <figure class="step-media">
+                    <img src="public/1.jpeg" alt="Step 1 reference screenshot showing how to load unpacked extension" loading="lazy">
+                </figure>
+                <p>
+                    Enable Developer Mode in Extensions.<br>
+                    Click <strong>Load unpacked</strong>.<br>
+                    Select the unzipped folder.<br>
+                    Extension is ready.
+                </p>
+                <a class="step-btn" href="public/1.jpeg" target="_blank" rel="noopener noreferrer">Open 1.jpeg</a>
+            </article>
+
+            <article class="step">
+                <h2>Step 2 (2.png)</h2>
+                <figure class="step-media">
+                    <img src="public/2.png" alt="Step 2 reference screenshot showing feedback form autofill flow" loading="lazy">
+                </figure>
+                <p>
+                    Open the feedback page.<br>
+                    Select each course one by one.<br>
+                    Click <strong>Fill Forms</strong>.<br>
+                    Review and submit.
+                </p>
+                <a class="step-btn" href="public/2.png" target="_blank" rel="noopener noreferrer">Open 2.png</a>
+            </article>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div><strong>Nithin Jambul &amp; Bhaskar Boddeti</strong></div>
+        <div class="links">
+            <a href="http://bhasprojects.in/" target="_blank" rel="noopener noreferrer">bhasprojects.in</a>
+            <a href="http://nithinjambula.dev/" target="_blank" rel="noopener noreferrer">nithinjambula.dev</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function downloadZip() {
+        window.location.href = "public/coursefeedback.zip";
+    }
+</script>
+
+</body>
+</html>
